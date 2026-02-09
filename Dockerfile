@@ -7,9 +7,9 @@ ENV HOME=/tmp \
     MAVEN_USER_HOME=/tmp/.m2 \
     TMPDIR=/tmp \
     XDG_CACHE_HOME=/tmp/.cache
-
-# Copy cloned project (run ./clone.sh first)
-COPY quarkus-test/ ./
+    
+# Copy from context (quarkus-test/) to /app
+COPY . /app
 
 # Make wrapper executable, fix CRLF, download dependencies
 RUN chmod +x mvnw && \
