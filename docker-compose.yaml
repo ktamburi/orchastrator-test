@@ -17,8 +17,8 @@ services:
       context: ./quarkus-test #dir name of repo cloned from clone.sh
       dockerfile: ../Dockerfile #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchastrator as in this example
     volumes:
-      - ./quarkus-test/src:/app/src
-      - ./quarkus-test/pom.xml:/app/pom.xml:ro
+      - ./quarkus-test/src:/app/src #parent dir name same as in context
+      - ./quarkus-test/pom.xml:/app/pom.xml:ro #parent dir name same as in context
     environment:
       QUARKUS_PROFILE: dev
       QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: update
