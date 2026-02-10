@@ -1,5 +1,2 @@
-# Cloned sub-repos (created by clone.sh)
-quarkus-test/
-
 # Local env
 .env
