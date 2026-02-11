@@ -14,7 +14,7 @@ services:
   app:
     build:
       context: ./quarkus-test-1 #dir name of repo cloned from clone.sh
-      dockerfile: ../Dockerfile #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchastrator as in this example
+      dockerfile: ../Dockerfile.quarkus-test-1 #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchestrator as in this example
     volumes:
       - ./quarkus-test-1/src:/app/src #parent dir name same as in context
       - ./quarkus-test-1/pom.xml:/app/pom.xml:ro #parent dir name same as in context
@@ -31,7 +31,7 @@ services:
   quarkus-test:
     build:
       context: ./quarkus-test #dir name of repo cloned from clone.sh
-      dockerfile: ../Dockerfile.quarkus-test #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchastrator as in this example
+      dockerfile: ../Dockerfile #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchestrator as in this example
     volumes:
       - ./quarkus-test/src:/app/src #parent dir name same as in context
       - ./quarkus-test/pom.xml:/app/pom.xml:ro #parent dir name same as in context
