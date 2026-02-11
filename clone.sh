@@ -1,12 +1,6 @@
 #!/usr/bin/env bash
 #
 # Example clone.sh for orchestrator repo.
-#
-# Behaviour:
-# - For each sub-repo: if directory exists, run git pull; otherwise git clone.
-# - Uses username and access token from arguments for authenticated clone/pull.
-#
-# Usage: ./clone.sh <username> <access_token>
 
 set -e
 
@@ -20,6 +14,7 @@ ACCESS_TOKEN="$2"
 # ```CUSTOMIZE THIS SECTION: Add your sub-repository URLs here```
 REPOS=(
   "https://github.com/ktamburi/quarkus-test-1.git"
+  "https://github.com/ktamburi/quarkus-test.git"
 )
 
 urlencode() {
