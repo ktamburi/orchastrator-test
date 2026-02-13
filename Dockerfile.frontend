@@ -1,0 +1,29 @@
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install deps
+# 1. Copy package files
+COPY package*.json ./
+
+# 2. Copy npmrc so npm knows about Nexus registry before install
+COPY .npmrc ./
+
+# 3. Install dependencies (use npm ci in CI for reproducible installs)
+RUN npm install
+
+# Copy the rest of the app
+COPY . .
+
+# Fix: Creare cartella cache Angular con permessi corretti
+RUN mkdir -p /app/.angular/cache && chmod -R 777 /app/.angular
+
+RUN sed -i -e 's|^\(\s*\)"servePath":.*|\1"servePath": "/",|' \
+       -e 's|"ssl": true|"ssl": false|' \
+       -e 's|"host": "localhost.inail.it"|"host": "localhost"|' angular.json
+
+# Angular dev server port
+EXPOSE 4200
+
+# Run Angular dev server, listening on all interfaces
+CMD ["npm", "run", "start", "--", "--host=0.0.0.0", "--port=4200", "--proxy-config", "proxy.conf.json"]

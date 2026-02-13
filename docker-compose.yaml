@@ -11,27 +11,20 @@ services:
       timeout: 5s
       retries: 5
 
-  app:
+  frontend:
     build:
-      context: ./quarkus-test-1 #dir name of repo cloned from clone.sh
-      dockerfile: ../Dockerfile.quarkus-test-1 #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchestrator as in this example
+      context: ./frontend-angular-test #dir name of repo cloned from clone.sh
+      dockerfile: ../Dockerfile.frontend #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchestrator as in this example
     volumes:
-      - ./quarkus-test-1/src:/app/src #parent dir name same as in context
-      - ./quarkus-test-1/pom.xml:/app/pom.xml:ro #parent dir name same as in context
-    environment:
-      QUARKUS_PROFILE: dev
-      QUARKUS_HIBERNATE_ORM_DATABASE_GENERATION: update
-      QUARKUS_DATASOURCE_JDBC_URL: jdbc:postgresql://postgres:5432/mydatabase
-      QUARKUS_DATASOURCE_USERNAME: leopold
-      QUARKUS_DATASOURCE_PASSWORD: bloom
+      - ./frontend-angular-test/src:/app/src #parent dir name same as in context
     depends_on:
-      postgres:
-        condition: service_healthy
+      backend:
+        condition: service_started
 
-  quarkus-test:
+  backend:
     build:
       context: ./quarkus-test #dir name of repo cloned from clone.sh
-      dockerfile: ../Dockerfile #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchestrator as in this example
+      dockerfile: ../Dockerfile.backend #location of docker file relative to context path, can keep inside cloned repository (./Dockerfile) or inside orchestrator as in this example
     volumes:
       - ./quarkus-test/src:/app/src #parent dir name same as in context
       - ./quarkus-test/pom.xml:/app/pom.xml:ro #parent dir name same as in context
