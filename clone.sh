@@ -14,7 +14,7 @@ ACCESS_TOKEN="$2"
 # ```CUSTOMIZE THIS SECTION: Add your sub-repository URLs here```
 REPOS=(
   "https://github.com/ktamburi/quarkus-test.git"
-  "git@github.com:ktamburi/frontend-angular-test.git"
+  "https://github.com/ktamburi/frontend-angular-test.git"
 )
 
 urlencode() {
